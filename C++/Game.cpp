@@ -137,8 +137,7 @@ bool Game::handleCorrectAnswer()
       << " Gold Coins." << endl;
 
   bool noWinnerYet = didPlayerNotWin();
-  currentPlayerIndex++;
-  if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
+  goToNextPlayer();
 
   return noWinnerYet;
 }
@@ -148,12 +147,15 @@ bool Game::handleWrongAnswer()
 	cout << "Question was incorrectly answered" << endl;
 	cout << players[currentPlayerIndex] + " was sent to the penalty box" << endl;
 	playerInPenaltyBox[currentPlayerIndex] = true;
-
-	currentPlayerIndex++;
-	if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
+  goToNextPlayer();
 	return true;
 }
 
+void Game::goToNextPlayer()
+{
+	currentPlayerIndex++;
+	if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
+}
 
 bool Game::didPlayerNotWin()
 {

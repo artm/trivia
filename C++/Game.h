@@ -36,6 +36,7 @@ class Game{
   void askQuestion();
   string currentCategory();
   void movePlayer(int distance);
+  void goToNextPlayer();
 
  public:
   bool handleCorrectAnswer();
