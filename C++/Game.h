@@ -11,27 +11,26 @@ class Game{
 		private:
 			vector<string> players;
 
-			int places[6];
-			int purses[6];
-
-			bool inPenaltyBox[6];
+			int playerPlace[6];
+			int playerPurse[6];
+			bool playerInPenaltyBox[6];
 
 			list<string> popQuestions;
 			list<string> scienceQuestions;
 			list<string> sportsQuestions;
 			list<string> rockQuestions;
 
-			int currentPlayer;
+			int currentPlayerIndex;
 			bool isGettingOutOfPenaltyBox;
 
 public:
 	Game();
 	string createRockQuestion(int index);
 	bool isPlayable();
-	bool add(string playerName);
+	bool addPlayer(string playerName);
 
-	int howManyPlayers();
-	void roll(int roll);
+	int playerCount();
+	void processRoll(int roll);
 
 	private:
 		void askQuestion();

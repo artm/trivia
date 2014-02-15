@@ -9,14 +9,14 @@ int main()
 
 	Game aGame;
 
-	aGame.add("Chet");
-	aGame.add("Pat");
-	aGame.add("Sue");
+	aGame.addPlayer("Chet");
+	aGame.addPlayer("Pat");
+	aGame.addPlayer("Sue");
 
 	do
 	{
 
-		aGame.roll(rand() % 5 + 1);
+		aGame.processRoll(rand() % 5 + 1);
 
 		if (rand() % 9 == 7)
 		{
