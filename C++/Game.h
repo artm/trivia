@@ -8,40 +8,40 @@ using namespace std;
 
 class Game{
 
-		private:
-			vector<string> players;
+ private:
+  vector<string> players;
 
-			int playerPlace[6];
-			int playerPurse[6];
-			bool playerInPenaltyBox[6];
+  int playerPlace[6];
+  int playerPurse[6];
+  bool playerInPenaltyBox[6];
 
-			list<string> popQuestions;
-			list<string> scienceQuestions;
-			list<string> sportsQuestions;
-			list<string> rockQuestions;
+  list<string> popQuestions;
+  list<string> scienceQuestions;
+  list<string> sportsQuestions;
+  list<string> rockQuestions;
 
-			int currentPlayerIndex;
-			bool isGettingOutOfPenaltyBox;
+  int currentPlayerIndex;
+  bool isGettingOutOfPenaltyBox;
 
-public:
-	Game();
-	string createRockQuestion(int index);
-	bool isPlayable();
-	bool addPlayer(string playerName);
+ public:
+  Game();
+  string createRockQuestion(int index);
+  bool isPlayable();
+  bool addPlayer(string playerName);
 
-	int playerCount();
-	void processRoll(int roll);
+  int playerCount();
+  void processRoll(int roll);
 
-	private:
-		void askQuestion();
-		string currentCategory();
+ private:
+  void askQuestion();
+  string currentCategory();
 
-				public:
-					bool wasCorrectlyAnswered();
-					bool wrongAnswer();
+ public:
+  bool wasCorrectlyAnswered();
+  bool wrongAnswer();
 
-private:
-	bool didPlayerNotWin();
+ private:
+  bool didPlayerNotWin();
 };
 
 #endif /* GAME_H_ */
