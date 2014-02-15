@@ -6,7 +6,7 @@ using namespace std;
 #ifndef GAME_H_
 #define GAME_H_
 
-class Game{
+class Game {
 
  private:
   vector<string> players;
@@ -22,8 +22,11 @@ class Game{
 
   int currentPlayerIndex;
   bool isGettingOutOfPenaltyBox;
+  bool finished;
 
  public:
+  const int WINNING_SCORE = 6;
+
   Game();
   string createQuestion(const string& category, int index);
   bool isPlayable();
@@ -32,6 +35,8 @@ class Game{
   int playerCount();
   void processRoll(int roll);
 
+  bool isFinished();
+
  private:
   void askQuestion();
   string currentCategory();
@@ -39,11 +44,9 @@ class Game{
   void goToNextPlayer();
 
  public:
-  bool handleCorrectAnswer();
-  bool handleWrongAnswer();
+  void handleCorrectAnswer();
+  void handleWrongAnswer();
 
- private:
-  bool didPlayerNotWin();
 };
 
 #endif /* GAME_H_ */

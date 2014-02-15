@@ -6,7 +6,7 @@
 
 using namespace std;
 
-Game::Game() : currentPlayerIndex(0), playerPlace({}), playerPurse({}){
+Game::Game() : currentPlayerIndex(0), playerPlace({}), playerPurse({}), finished(false){
 	for (int i = 0; i < 50; i++)
 	{
 		popQuestions.push_back(createQuestion("Pop", i));
@@ -121,12 +121,12 @@ string Game::currentCategory()
 	return "Rock";
 }
 
-bool Game::handleCorrectAnswer()
+void Game::handleCorrectAnswer()
 {
   if (playerInPenaltyBox[currentPlayerIndex] && !isGettingOutOfPenaltyBox) {
     currentPlayerIndex++;
     if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
-    return true;
+    return;
   }
 
   cout << "Answer was correct!!!!" << endl;
@@ -136,19 +136,22 @@ bool Game::handleCorrectAnswer()
       << playerPurse[currentPlayerIndex]
       << " Gold Coins." << endl;
 
-  bool noWinnerYet = didPlayerNotWin();
+  finished = playerPurse[currentPlayerIndex] == WINNING_SCORE;
+
   goToNextPlayer();
 
-  return noWinnerYet;
 }
 
-bool Game::handleWrongAnswer()
+bool Game::isFinished() {
+  return finished;
+}
+
+void Game::handleWrongAnswer()
 {
 	cout << "Question was incorrectly answered" << endl;
 	cout << players[currentPlayerIndex] + " was sent to the penalty box" << endl;
 	playerInPenaltyBox[currentPlayerIndex] = true;
   goToNextPlayer();
-	return true;
 }
 
 void Game::goToNextPlayer()
@@ -157,7 +160,3 @@ void Game::goToNextPlayer()
 	if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
 }
 
-bool Game::didPlayerNotWin()
-{
-	return !(playerPurse[currentPlayerIndex] == 6);
-}
