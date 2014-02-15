@@ -25,7 +25,7 @@ class Game{
 
  public:
   Game();
-  string createRockQuestion(int index);
+  string createQuestion(const string& category, int index);
   bool isPlayable();
   bool addPlayer(string playerName);
 
@@ -35,6 +35,7 @@ class Game{
  private:
   void askQuestion();
   string currentCategory();
+  void movePlayer(int distance);
 
  public:
   bool handleCorrectAnswer();

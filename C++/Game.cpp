@@ -9,29 +9,18 @@ using namespace std;
 Game::Game() : currentPlayerIndex(0), playerPlace({}), playerPurse({}){
 	for (int i = 0; i < 50; i++)
 	{
-
-		ostringstream oss (ostringstream::out);
-		oss << "Pop Question " << i;
-
-		popQuestions.push_back(oss.str());
-
-		char str[255];
-		sprintf(str, "Science Question %d", i);
-		scienceQuestions.push_back(str);
-
-		char str1[255];
-		sprintf(str1, "Sports Question %d", i);
-		sportsQuestions.push_back(str1);
-
-		rockQuestions.push_back(createRockQuestion(i));
+		popQuestions.push_back(createQuestion("Pop", i));
+		rockQuestions.push_back(createQuestion("Rock", i));
+		scienceQuestions.push_back(createQuestion("Science", i));
+		sportsQuestions.push_back(createQuestion("Sports", i));
 	}
 }
 
-string Game::createRockQuestion(int index)
+string Game::createQuestion(const string& category, int index)
 {
-	char indexStr[127];
-	sprintf(indexStr, "Rock Question %d", index);
-	return indexStr;
+  ostringstream oss (ostringstream::out);
+  oss << category << " Question " << index;
+  return oss.str();
 }
 
 bool Game::isPlayable()
@@ -62,40 +51,39 @@ void Game::processRoll(int roll)
 
 	if (playerInPenaltyBox[currentPlayerIndex])
 	{
-		if (roll % 2 != 0)
+    isGettingOutOfPenaltyBox = roll % 2 != 0;
+    cout
+        << players[currentPlayerIndex]
+        << " is "
+        << (isGettingOutOfPenaltyBox ? "" : "not ")
+        << "getting out of the penalty box"
+        << endl;
+
+		if (isGettingOutOfPenaltyBox)
 		{
-			isGettingOutOfPenaltyBox = true;
-
-			cout << players[currentPlayerIndex] << " is getting out of the penalty box" << endl;
-			playerPlace[currentPlayerIndex] = playerPlace[currentPlayerIndex] + roll;
-			if (playerPlace[currentPlayerIndex] > 11) playerPlace[currentPlayerIndex] = playerPlace[currentPlayerIndex] - 12;
-
-			cout << players[currentPlayerIndex] << "'s new location is " << playerPlace[currentPlayerIndex] << endl;
-			cout << "The category is " << currentCategory() << endl;
+      movePlayer(roll);
 			askQuestion();
-		}
-		else
-		{
-			cout << players[currentPlayerIndex] << " is not getting out of the penalty box" << endl;
-			isGettingOutOfPenaltyBox = false;
 		}
 
 	}
 	else
 	{
 
-		playerPlace[currentPlayerIndex] = playerPlace[currentPlayerIndex] + roll;
-		if (playerPlace[currentPlayerIndex] > 11) playerPlace[currentPlayerIndex] = playerPlace[currentPlayerIndex] - 12;
-
-		cout << players[currentPlayerIndex] << "'s new location is " << playerPlace[currentPlayerIndex] << endl;
-		cout << "The category is " << currentCategory() << endl;
+    movePlayer(roll);
 		askQuestion();
 	}
 
 }
+void Game::movePlayer(int distance) {
+		playerPlace[currentPlayerIndex] = playerPlace[currentPlayerIndex] + distance;
+		if (playerPlace[currentPlayerIndex] > 11) playerPlace[currentPlayerIndex] = playerPlace[currentPlayerIndex] - 12;
+
+		cout << players[currentPlayerIndex] << "'s new location is " << playerPlace[currentPlayerIndex] << endl;
+}
 
 void Game::askQuestion()
 {
+  cout << "The category is " << currentCategory() << endl;
 	if (currentCategory() == "Pop")
 	{
 		cout << popQuestions.front() << endl;
