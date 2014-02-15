@@ -153,7 +153,7 @@ bool Game::handleCorrectAnswer()
 	else
 	{
 
-		cout << "Answer was corrent!!!!" << endl;
+		cout << "Answer was correct!!!!" << endl;
 		playerPurse[currentPlayerIndex]++;
 		cout << players[currentPlayerIndex]
 				<< " now has "
