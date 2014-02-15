@@ -5,6 +5,8 @@ static bool notAWinner;
 
 int main()
 {
+  srand(42);
+
 	Game aGame;
 
 	aGame.add("Chet");

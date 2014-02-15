@@ -42,7 +42,7 @@ public:
 					bool wrongAnswer();
 
 private:
-	bool didPlayerWin();
+	bool didPlayerNotWin();
 };
 
 #endif /* GAME_H_ */

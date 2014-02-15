@@ -146,11 +146,11 @@ bool Game::wasCorrectlyAnswered()
 			     << purses[currentPlayer]
 				<<  " Gold Coins." << endl;
 
-			bool winner = didPlayerWin();
+			bool noWinnerYet = didPlayerNotWin();
 			currentPlayer++;
 			if (currentPlayer == players.size()) currentPlayer = 0;
 
-			return winner;
+			return noWinnerYet;
 		}
 		else
 		{
@@ -172,11 +172,11 @@ bool Game::wasCorrectlyAnswered()
 				<< purses[currentPlayer]
 			<< " Gold Coins." << endl;
 
-		bool winner = didPlayerWin();
+		bool noWinnerYet = didPlayerNotWin();
 		currentPlayer++;
 		if (currentPlayer == players.size()) currentPlayer = 0;
 
-		return winner;
+		return noWinnerYet;
 	}
 }
 
@@ -192,7 +192,7 @@ bool Game::wrongAnswer()
 }
 
 
-bool Game::didPlayerWin()
+bool Game::didPlayerNotWin()
 {
 	return !(purses[currentPlayer] == 6);
 }
