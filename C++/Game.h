@@ -37,8 +37,8 @@ class Game{
   string currentCategory();
 
  public:
-  bool wasCorrectlyAnswered();
-  bool wrongAnswer();
+  bool handleCorrectAnswer();
+  bool handleWrongAnswer();
 
  private:
   bool didPlayerNotWin();

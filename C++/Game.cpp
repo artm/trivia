@@ -133,7 +133,7 @@ string Game::currentCategory()
 	return "Rock";
 }
 
-bool Game::wasCorrectlyAnswered()
+bool Game::handleCorrectAnswer()
 {
 	if (playerInPenaltyBox[currentPlayerIndex])
 	{
@@ -180,7 +180,7 @@ bool Game::wasCorrectlyAnswered()
 	}
 }
 
-bool Game::wrongAnswer()
+bool Game::handleWrongAnswer()
 {
 	cout << "Question was incorrectly answered" << endl;
 	cout << players[currentPlayerIndex] + " was sent to the penalty box" << endl;

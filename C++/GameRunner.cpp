@@ -20,11 +20,11 @@ int main()
 
 		if (rand() % 9 == 7)
 		{
-			notAWinner = aGame.wrongAnswer();
+			notAWinner = aGame.handleWrongAnswer();
 		}
 		else
 		{
-			notAWinner = aGame.wasCorrectlyAnswered();
+			notAWinner = aGame.handleCorrectAnswer();
 		}
 	} while (notAWinner);
 
