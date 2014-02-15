@@ -123,49 +123,24 @@ string Game::currentCategory()
 
 bool Game::handleCorrectAnswer()
 {
-	if (playerInPenaltyBox[currentPlayerIndex])
-	{
-		if (isGettingOutOfPenaltyBox)
-		{
-			cout << "Answer was correct!!!!" << endl;
-			playerPurse[currentPlayerIndex]++;
-			cout << players[currentPlayerIndex]
-			     << " now has "
-			     << playerPurse[currentPlayerIndex]
-				<<  " Gold Coins." << endl;
+  if (playerInPenaltyBox[currentPlayerIndex] && !isGettingOutOfPenaltyBox) {
+    currentPlayerIndex++;
+    if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
+    return true;
+  }
 
-			bool noWinnerYet = didPlayerNotWin();
-			currentPlayerIndex++;
-			if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
+  cout << "Answer was correct!!!!" << endl;
+  playerPurse[currentPlayerIndex]++;
+  cout << players[currentPlayerIndex]
+      << " now has "
+      << playerPurse[currentPlayerIndex]
+      << " Gold Coins." << endl;
 
-			return noWinnerYet;
-		}
-		else
-		{
-			currentPlayerIndex++;
-			if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
-			return true;
-		}
+  bool noWinnerYet = didPlayerNotWin();
+  currentPlayerIndex++;
+  if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
 
-
-
-	}
-	else
-	{
-
-		cout << "Answer was correct!!!!" << endl;
-		playerPurse[currentPlayerIndex]++;
-		cout << players[currentPlayerIndex]
-				<< " now has "
-				<< playerPurse[currentPlayerIndex]
-			<< " Gold Coins." << endl;
-
-		bool noWinnerYet = didPlayerNotWin();
-		currentPlayerIndex++;
-		if (currentPlayerIndex == players.size()) currentPlayerIndex = 0;
-
-		return noWinnerYet;
-	}
+  return noWinnerYet;
 }
 
 bool Game::handleWrongAnswer()
